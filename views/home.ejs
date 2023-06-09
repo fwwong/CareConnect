@@ -1,1 +1,18 @@
 <%- include('partials/navbar') %>
+
+<div class="d-flex justify-content-center">
+    <form method="post" action="/submitPrompt">
+        <div class="form-group">
+            <label for="prompt">Prompt</label>
+            <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter prompt">
+        </div>
+            <input type="hidden" name="blank">
+            <div class="col">
+                <button type="submit" id="submit"
+                    class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
+                    Submit
+                </button>
+            </div>
+        </>
+    </form>
+</div>
