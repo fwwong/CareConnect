@@ -78,12 +78,6 @@ module.exports = function (app) {
             }
 
         }
-        console.log("filteredObjects is: ", filteredObjects)
-
-        // console.log("sanctuaryObjects is: ", sanctuaryObjects)
-        // modify the prompt to be used in the API call
-        // var fullPrompt = createGPTPrompt(userPrompt);
-        // var gptResponse = await makeAPIRequest(fullPrompt);
-        res.render('home', { userPrompt: userPrompt, sanctuaryResponse: JSON.stringify(filteredObjects) }); //, sanctuaryResponse: sanctuaryResponse
+        res.render('home', { userPrompt: userPrompt, sanctuaryResponse: filteredObjects }); //, sanctuaryResponse: sanctuaryResponse
     });
 };
