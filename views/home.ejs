@@ -1,19 +1,18 @@
 <%- include('partials/navbar') %>
 
-<div class="d-flex justify-content-center">
-    <form method="post" action="/submitPrompt">
-        <div class="form-group">
-            <label for="prompt">Prompt</label>
-            <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter prompt">
-        </div>
-            <input type="hidden" name="blank">
-            <div class="col">
-                <button type="submit" id="submit"
-                    class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
-                    Submit
-                </button>
+    <div class="d-flex justify-content-center"
+        style="position: fixed; background-color: rgb(236, 236, 236); bottom: 0; padding: 10px; width: 100%; justify-content: center;">
+        <form method=" post" action="/submitPrompt" style="width: 75%;">
+            <div class="form-group">
+                <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter prompt">
             </div>
-            <p class="text-red-500">Welcome to hi</p>
-        </>
-    </form>
-</div>
+            <input type="hidden" name="blank">
+            </>
+        </form>
+        <button type="submit" id="submit"
+            class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
+            Submit
+        </button>
+
+    </div>
+    <%- include('partials/promptContainer') %>
