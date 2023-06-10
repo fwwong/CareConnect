@@ -1,12 +1,13 @@
 <%- include('partials/navbar') %>
 
+<!-- <h3>bobbobob</h3> -->
 <div class="d-flex justify-content-center">
-    <form method="post" action="/submitPrompt">
+    <form method="post" action="/submitPrompt" role="form">
         <div class="form-group">
             <label for="prompt">Prompt</label>
-            <input type="text" class="form-control" id="prompt" name="prompt" value="Enter prompt" placeholder="Enter Prompt">
+            <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter Prompt" 
+            <% if (userPrompt != "") { %> value='<%=userPrompt%>'> <% } %>
         </div>
-            <input type="hidden" name="blank">
             <div class="col">
                 <button type="submit"
                     class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
