@@ -112,11 +112,6 @@ module.exports = function (app) {
         return sitesList
     }
 
-    app.get('/', (req, res) => {
-        // render the home page
-        res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "" });
-    });
-
     app.post('/submitPrompt', async (req, res) => {
         var userPrompt = req.body.prompt;
 
