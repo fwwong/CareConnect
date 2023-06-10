@@ -25,6 +25,20 @@ module.exports = function (app) {
         return finalObject;
     }
 
+    app.get('/', (req, res) => {
+        // render splash page
+        res.render('index');
+    });
+
+
+    app.get('/home', (req, res) => {
+        // render the home page
+        res.render('home', { userPrompt: "", sanctuaryResponse: "" });
+    });
+
+    app.post('/submitPrompt', async (req, res) => {
+        var userPrompt = req.body.prompt;
+        console.log(userPrompt)
     async function handleSanctuaryQuery(userPrompt) {
         var searchTerms = generateSearchConditions(userPrompt);
         console.log(searchTerms)
