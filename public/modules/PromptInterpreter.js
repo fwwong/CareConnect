@@ -3,7 +3,7 @@
 
 
 
-function importPromptData(promptResponses) {
+function importPromptData(promptResponse) {
 
 };
 
