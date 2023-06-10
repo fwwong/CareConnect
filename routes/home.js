@@ -7,11 +7,12 @@ const makeSanctuaryAPIRequest = require('./sanctuaryHealthAPIcall');
 module.exports = function (app) {
 
     function createGPTPrompt(userPrompt) {
-        return (userPrompt)
-    }
 
-    function createSanctuaryQueryVariables(userPrompt) {
-        return (userPrompt)
+        GPTPrompt = `Give me a list of sites and descriptions in this format. The sites should provide more information on the prompt "${userPrompt}".
+
+{ "sites": [{"url": url, "description": description} ,  "site": {"url": url, "description": description} ,  "site": {"url": url, "description": description}]  } etc.`
+
+        return (GPTPrompt)
     }
 
     function generateSearchConditions(string) {
@@ -70,17 +71,27 @@ module.exports = function (app) {
         return filteredObjects
     }
 
+    async function handleGPTQuery(userPrompt) {
+        var GPTPrompt = await createGPTPrompt(userPrompt);
+        var GPTResponse = await makeAPIRequest(GPTPrompt);
+        // console.log("GPTResponse is: ", GPTResponse)
+        var GPTParsed = JSON.parse(GPTResponse);
+        var sitesList = GPTParsed.sites;
+        console.log("sitesList is: ", sitesList)
+        return sitesList
+    }
+
     app.get('/', (req, res) => {
         // render the home page
-        res.render('home', { userPrompt: "", sanctuaryResponse: "" });
+        res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "" });
     });
 
     app.post('/submitPrompt', async (req, res) => {
         var userPrompt = req.body.prompt;
-        console.log(userPrompt)
-        
-        filteredObjects = await handleSanctuaryQuery(userPrompt);
-        
-        res.render('home', { userPrompt: userPrompt, sanctuaryResponse: filteredObjects }); //, sanctuaryResponse: sanctuaryResponse
+
+        var sitesList = await handleGPTQuery(userPrompt);
+        var sanctuaryVideos = await handleSanctuaryQuery(userPrompt);
+
+        res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
     });
 };
