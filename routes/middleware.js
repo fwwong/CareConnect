@@ -1,7 +1,8 @@
 const url = require('url');
 
 module.exports = (req, res, next) => {
-    res.locals.navlinks = navLinks;
+    res.locals.navLinks = navLinks;
+    res.locals.path = url.parse(req.url).pathname;
     next();
 };
 
@@ -41,3 +42,7 @@ const navLinks = [{
     icon: 'info',
 }
 ];
+
+//console.log(navLinks.length)
+// console.log(navLinks[1].name)
+

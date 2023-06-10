@@ -1,9 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const navlinks = require('./routes/navlinks');
-
-
+const middleware = require('./routes/middleware');
 
 // const mongodb_host = process.env.MONGODB_HOST;
 // const mongodb_user = process.env.MONGODB_USER;
@@ -22,7 +20,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(navlinks);
+app.use(middleware);
 
 // import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, HttpLink, concat } from '@apollo/client';
 
@@ -46,13 +44,6 @@ app.use(navlinks);
 
 
 require('./routes/home')(app);
-
-
-
-
-
-
-
 
 
 const port = process.env.PORT || 3000;

@@ -2,7 +2,7 @@ var express = require('express');
 router = express.Router();
 const makeAPIRequest = require('./OpenAIcall');
 const makeSanctuaryAPIRequest = require('./sanctuaryHealthAPIcall');
-
+const navLinks = require('./middleware');
 
 module.exports = function (app) {
 
@@ -34,6 +34,8 @@ module.exports = function (app) {
         // render the home page
         res.render('home', { userPrompt: "", sanctuaryResponse: "" });
     });
+  
+    app.use(navLinks);
 
     app.post('/submitPrompt', async (req, res) => {
         var userPrompt = req.body.prompt;
@@ -109,4 +111,6 @@ module.exports = function (app) {
 
         res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
     });
+
+
 }
