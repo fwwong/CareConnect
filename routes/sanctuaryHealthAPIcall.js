@@ -9,24 +9,7 @@ const headers =
 };
 
 async function makeSanctuaryAPIRequest(sequelizeQuery) {
-    const query =
-    // setting the data for the API call
-    `query {
-  getPosts(sequelizeQuery: {
-    where: "{\"$or\":{\"title\":{\"$iLike\":\"%start the day%\"},\"description\":{\"$iLike\":\"%start the day%\"}}}",
-    include: "[{\"association\":\"postParent\",\"where\":{\"category\":{\"$overlap\":[\"meditation_anxiety\",\"meditation_bodyConfidence\",\"meditation_breathwork\",\"meditation_focus\",\"meditation_gong\",\"meditation_grief\",\"meditation_kids\",\"meditation_morning\",\"meditation_parental\",\"meditation_sexualHealth\",\"meditation_sleep\",\"meditation_soundscapes\",\"meditation_womensHealth\"]}}}]"
-  }) {
-    id
-    title
-    description
-    mediaFileDetailsList {
-      file {
-        url
-      }
-    }
-  }
-}
-`;
+    console.log("sequelizeQuery is: ", sequelizeQuery)
     try {
         const response = await fetch("https://v4-0-dot-livitay.appspot.com/graphql", {
             method: "POST",

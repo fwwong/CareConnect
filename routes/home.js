@@ -6,11 +6,11 @@ const makeSanctuaryAPIRequest = require('./sanctuaryHealthAPIcall');
 
 module.exports = function (app) {
 
-    function createGPTPrompt(userPrompt){
+    function createGPTPrompt(userPrompt) {
         return (userPrompt)
     }
 
-    function createSanctuaryQueryVariables(userPrompt){
+    function createSanctuaryQueryVariables(userPrompt) {
         return (userPrompt)
     }
 
@@ -26,7 +26,7 @@ module.exports = function (app) {
 
     app.get('/', (req, res) => {
         // render the home page
-        res.render('home', { gptPrompt: false, userPrompt: "", sanctuaryResponse: ""});
+        res.render('home', { userPrompt: "", sanctuaryResponse: "" });
     });
 
     app.post('/submitPrompt', async (req, res) => {
@@ -45,10 +45,45 @@ module.exports = function (app) {
         var sanctuaryResponse = await makeSanctuaryAPIRequest(sequelizeQuery);
         // console.log("sanctuaryResponse is: ", sanctuaryResponse)
         var sanctuaryObjects = sanctuaryResponse.data.getPosts
-        console.log("sanctuaryObjects is: ", sanctuaryObjects)
+        // var filteredObjects = sanctuaryObjects.filter(object => object.mediaFileDetailsList.length > 0)
+        var filteredObjects = []
+        for (var i = 0; i < sanctuaryObjects.length; i++) {
+            try {
+                // if sanctuaryObjects[i].mediaFileDetailsList[0].file.url doesn't end in .mp4, continue
+                if (sanctuaryObjects[i].mediaFileDetailsList[0].file.url.slice(-4) != ".mp4") {
+                    continue
+                }
+                filteredObjects.push({
+                    title: sanctuaryObjects[i].title,
+                    description: sanctuaryObjects[i].description,
+                    url: sanctuaryObjects[i].mediaFileDetailsList[0].file.url
+                })
+            }
+            catch (error) {
+                try {
+                    if (sanctuaryObjects[i].mediaFileDetailsList[0].slice(-4) != ".mp4") {
+                        continue
+                    }
+                    filteredObjects.push({
+                        title: sanctuaryObjects[i].title,
+                        description: sanctuaryObjects[i].description,
+                        url: sanctuaryObjects[i].mediaFileDetailsList[0]
+                    })
+                }
+                catch (error) {
+                    console.log("error is: ", error)
+                    continue
+                }
+                continue
+            }
+
+        }
+        console.log("filteredObjects is: ", filteredObjects)
+
+        // console.log("sanctuaryObjects is: ", sanctuaryObjects)
         // modify the prompt to be used in the API call
         // var fullPrompt = createGPTPrompt(userPrompt);
         // var gptResponse = await makeAPIRequest(fullPrompt);
-        res.render('home', { gptPrompt: userPrompt, userPrompt: userPrompt, sanctuaryResponse: JSON.stringify(sanctuaryResponse)}); //, sanctuaryResponse: sanctuaryResponse
+        res.render('home', { userPrompt: userPrompt, sanctuaryResponse: JSON.stringify(filteredObjects) }); //, sanctuaryResponse: sanctuaryResponse
     });
 };
