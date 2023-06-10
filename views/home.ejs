@@ -1,5 +1,7 @@
+<%- include('partials/header') %>
 <%- include('partials/navbar') %>
 
+<<<<<<< HEAD
     <div class="d-flex justify-content-center"
         style="position: fixed; background-color: rgb(236, 236, 236); bottom: 0; padding: 10px; width: 100%;">
         <form method=" post" action="/submitPrompt" style="width: 100%;">
@@ -16,3 +18,24 @@
         </form>
     </div>
     <%- include('partials/promptContainer') %>
+=======
+<!-- <h3>bobbobob</h3> -->
+<div class="d-flex justify-content-center">
+    <form method="post" action="/submitPrompt" role="form">
+        <div class="form-group">
+            <label for="prompt">Prompt</label>
+            <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter Prompt" 
+            <% if (userPrompt != "") { %> value='<%=userPrompt%>'> <% } %>
+        </div>
+            <div class="col">
+                <button type="submit"
+                    class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
+                    Submit
+                </button>
+            </div>
+            <p class="text-red-500">Welcome to hi</p>
+    </form>
+</div>
+
+<%- include('partials/footer') %>
+>>>>>>> dev
