@@ -8,8 +8,7 @@ const headers =
     "apikey": "9677bbd3-4b5b-4a2f-a085-201771d6ad9c"
 };
 
-async function makeSanctuaryAPIRequest(sequelizeQuery) {
-    console.log("sequelizeQuery is: ", sequelizeQuery)
+async function makeSanctuaryAPIRequest(listOfWords) {
     try {
         const response = await fetch("https://v4-0-dot-livitay.appspot.com/graphql", {
             method: "POST",
@@ -31,10 +30,10 @@ async function makeSanctuaryAPIRequest(sequelizeQuery) {
   }
 }`,
                 variables: {
-                    sequelizeQuery: sequelizeQuery
-                    // "sequelizeQuery": {
-                    //     "where": "{\"$or\":[{\"title\":{\"$iLike\":\"%Start%\"}},{\"description\":{\"$iLike\":\"%Start%\"}}]}"
-                    // }
+                    // sequelizeQuery: sequelizeQuery
+                    "sequelizeQuery": {
+                        "where": `{\"$or\":[{\"title\":{\"$iLike\":\"%${listOfWords[0]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[1]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[2]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[3]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[4]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[5]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[6]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[7]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[8]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[9]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[10]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[11]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[12]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[13]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[14]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[15]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[16]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[17]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[18]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[19]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[20]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[21]}%\"}}, {\"title\":{\"$iLike\":\"%${listOfWords[22]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[23]}%\"}},{\"title\":{\"$iLike\":\"%${listOfWords[24]}%\"}},{\"description\":{\"$iLike\":\"%${listOfWords[25]}%\"}}]}`
+                    }
                 }
             })
         });

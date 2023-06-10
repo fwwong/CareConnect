@@ -15,14 +15,29 @@ module.exports = function (app) {
         return (GPTPrompt)
     }
 
+    // function generateSearchConditions(string) {
+    //     const words = string.split(" ");
+    //     var longWords = words.filter(word => word.length > 3);
+    //     const searchConditions = longWords.map(word => {
+    //         return `{\\"title\\":{\\"$iLike\\":\\"%${word}%\\"}},{\\"description\\":{\\"$iLike\\":\\"%${word}%\\"}},`;
+    //     }).join("");
+    //     const finalObject = `"{\\"$or\\":[${searchConditions.slice(0, -1)}]}"`;
+    //     return finalObject;
+    // }
+
     function generateSearchConditions(string) {
         const words = string.split(" ");
-        var longWords = words.filter(word => word.length > 3);
-        const searchConditions = longWords.map(word => {
-            return `{\\"title\\":{\\"$iLike\\":\\"%${word}%\\"}},{\\"description\\":{\\"$iLike\\":\\"%${word}%\\"}},`;
-        }).join("");
-        const finalObject = `"{\\"$or\\":[${searchConditions.slice(0, -1)}]}"`;
-        return finalObject;
+        const list = Array(26).fill("Charmander");
+        console.log(list);
+        for (var i = 0; i < words.length; i++) {
+            if (i > 25) {
+                break
+            }
+            if (words[i].length > 3) {
+                list[i] = words[i];
+            }
+        }
+        return list;
     }
 
     app.get('/', (req, res) => {
@@ -41,19 +56,19 @@ module.exports = function (app) {
     });
 
     async function handleSanctuaryQuery(userPrompt) {
-        var searchTerms = generateSearchConditions(userPrompt);
-        console.log(searchTerms)
+        var listOfWords = generateSearchConditions(userPrompt)
+
+        // console.log("String.raw searchterms", String.raw`${searchTerms}`)
         // return
-        var sequelizeQuery = {
-            "where": searchTerms
-        }
-        var sanctuaryResponse = await makeSanctuaryAPIRequest(sequelizeQuery);
+        var sanctuaryResponse = await makeSanctuaryAPIRequest(listOfWords);
+        // console.log("sequelizeQuery is: ", sequelizeQuery)
         // console.log("sanctuaryResponse is: ", sanctuaryResponse)
         var sanctuaryObjects = sanctuaryResponse.data.getPosts
         // var filteredObjects = sanctuaryObjects.filter(object => object.mediaFileDetailsList.length > 0)
         var filteredObjects = []
         for (var i = 0; i < sanctuaryObjects.length; i++) {
             try {
+                console.log("sanctuaryObjects[i].mediaFileDetailsList[0].file.url is: ", sanctuaryObjects[i].mediaFileDetailsList[0].file.url)
                 // if sanctuaryObjects[i].mediaFileDetailsList[0].file.url doesn't end in .mp4, continue
                 if (sanctuaryObjects[i].mediaFileDetailsList[0].file.url.slice(-4) != ".mp4") {
                     continue
@@ -83,6 +98,7 @@ module.exports = function (app) {
             }
 
         }
+        console.log("filteredObjects is: ", filteredObjects)
         return filteredObjects
     }
 
@@ -104,7 +120,8 @@ module.exports = function (app) {
     app.post('/submitPrompt', async (req, res) => {
         var userPrompt = req.body.prompt;
 
-        var sitesList = await handleGPTQuery(userPrompt);
+        // var sitesList = await handleGPTQuery(userPrompt);
+        var sitesList = ""
         var sanctuaryVideos = await handleSanctuaryQuery(userPrompt);
 
         res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
