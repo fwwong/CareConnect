@@ -25,6 +25,12 @@ module.exports = function (app) {
     }
 
     app.get('/', (req, res) => {
+        // render splash page
+        res.render('index');
+    });
+
+
+    app.get('/home', (req, res) => {
         // render the home page
         res.render('home', { gptPrompt: false, userPrompt: "", sanctuaryResponse: ""});
     });
