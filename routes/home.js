@@ -50,11 +50,6 @@ module.exports = function (app) {
         res.render('home', { userPrompt: "", sanctuaryResponse: "" });
     });
 
-    app.post('/submitPrompt', async (req, res) => {
-        var userPrompt = req.body.prompt;
-        console.log(userPrompt)
-    });
-
     async function handleSanctuaryQuery(userPrompt) {
         var listOfWords = generateSearchConditions(userPrompt)
 
@@ -115,8 +110,7 @@ module.exports = function (app) {
     app.post('/submitPrompt', async (req, res) => {
         var userPrompt = req.body.prompt;
 
-        // var sitesList = await handleGPTQuery(userPrompt);
-        var sitesList = ""
+        var sitesList = await handleGPTQuery(userPrompt);
         var sanctuaryVideos = await handleSanctuaryQuery(userPrompt);
 
         res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
