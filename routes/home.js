@@ -24,24 +24,13 @@ module.exports = function (app) {
         return finalObject;
     }
 
-    app.get('/', (req, res) => {
-        // render the home page
-        res.render('home', { userPrompt: "", sanctuaryResponse: "" });
-    });
-
-    app.post('/submitPrompt', async (req, res) => {
-        var userPrompt = req.body.prompt;
-        console.log(userPrompt)
+    async function handleSanctuaryQuery(userPrompt) {
         var searchTerms = generateSearchConditions(userPrompt);
         console.log(searchTerms)
         // return
         var sequelizeQuery = {
             "where": searchTerms
         }
-
-        // sequelizeQuery = JSON.parse(sequelizeQuery);
-
-
         var sanctuaryResponse = await makeSanctuaryAPIRequest(sequelizeQuery);
         // console.log("sanctuaryResponse is: ", sanctuaryResponse)
         var sanctuaryObjects = sanctuaryResponse.data.getPosts
@@ -78,6 +67,20 @@ module.exports = function (app) {
             }
 
         }
+        return filteredObjects
+    }
+
+    app.get('/', (req, res) => {
+        // render the home page
+        res.render('home', { userPrompt: "", sanctuaryResponse: "" });
+    });
+
+    app.post('/submitPrompt', async (req, res) => {
+        var userPrompt = req.body.prompt;
+        console.log(userPrompt)
+        
+        filteredObjects = await handleSanctuaryQuery(userPrompt);
+        
         res.render('home', { userPrompt: userPrompt, sanctuaryResponse: filteredObjects }); //, sanctuaryResponse: sanctuaryResponse
     });
 };
