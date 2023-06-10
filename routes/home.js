@@ -30,7 +30,6 @@ module.exports = function (app) {
         res.render('index');
     });
 
-
     app.get('/home', (req, res) => {
         // render the home page
         res.render('home', { userPrompt: "", sanctuaryResponse: "" });
@@ -39,6 +38,8 @@ module.exports = function (app) {
     app.post('/submitPrompt', async (req, res) => {
         var userPrompt = req.body.prompt;
         console.log(userPrompt)
+    });
+
     async function handleSanctuaryQuery(userPrompt) {
         var searchTerms = generateSearchConditions(userPrompt);
         console.log(searchTerms)
@@ -108,4 +109,4 @@ module.exports = function (app) {
 
         res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
     });
-};
+}
