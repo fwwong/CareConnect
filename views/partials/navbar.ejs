@@ -24,11 +24,14 @@
                         </div>
 
                         <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 p-2">
                                 <!-- for loop menu items-->
                                   <% for(var i = 0; i < navLinks.length; i++) {%>
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="#"><%-navLinks[i].name %></a>
+                                        <a class="nav-link" aria-current="page" href="#">
+                                            <p class="text-lg"><i class="<%-navLinks[i].icon%>"></i>
+                                                &nbsp; <%-navLinks[i].name %></p>
+                                        </a>
                                         <hr>
                                     </li>
                                     <% } %> 

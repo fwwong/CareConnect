@@ -9,37 +9,37 @@ module.exports = (req, res, next) => {
 const navLinks = [{
     name: 'Home',
     link: '/home', 
-    icon: 'home',
+    icon: 'fa-solid fa-house',
 },
 {
     name: 'Find a Clinic',
     link: '/map',
-    icon: 'info',
+    icon: 'fa solid fa-location-dot fa-lg',
 },
 {
     name: 'Ask a health professional',
     link: '/professional',
-    icon: 'info',
+    icon: 'fa solid fa-user-doctor',
 },
 {
     name: 'About Us',
     link: '/about',
-    icon: 'info',
+    icon: 'fa solid fa-info-circle',
 },
 {
     name: 'FAQ',
     link: '/faq',
-    icon: 'info',
+    icon: 'fa solid fa-question-circle',
 },
 {
     name: 'Contact Us',
     link: '/contact',
-    icon: 'info',
+    icon: 'fa solid fa-envelope',
 },
 {
     name: 'Language',
     link: '/language',
-    icon: 'info',
+    icon: 'fa solid fa-universal-access',
 }
 ];
 
