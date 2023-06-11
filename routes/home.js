@@ -3,6 +3,11 @@ router = express.Router();
 const makeAPIRequest = require('./OpenAIcall');
 const makeSanctuaryAPIRequest = require('./sanctuaryHealthAPIcall');
 const navLinks = require('./middleware');
+const { error } = require('console');
+
+
+
+var persistentPromptResponses;
 
 module.exports = function (app) {
 
@@ -46,8 +51,17 @@ module.exports = function (app) {
     });
 
     app.get('/home', (req, res) => {
+        //init persistent prompt list
+        persistentPromptResponses = [];
+        //debug for list of rendered responses
+        // persistentPromptResponses.push(
+        //     { "type": "website", "url": "https://stackoverflow.com/questions/55551264/syntaxerror-missing-after-argument-list-in-while-compiling-ejs", "title": "Stackoverflow", "desc": "A Place for nerds who think a lot and shower very very seldomly" },
+        //     { "type": "video", "url": "https://www.youtube.com/embed/w0SxvCScZ3Q", "title": "🥺🥺🥺", "desc": "All the patient care you could ever need" },
+        //     { "type": "video", "url": "https://www.youtube.com/embed/qZfLduNfFig", "title": "😳😳😳", "desc": "A Bit of a Pick me up" },
+        //     { "type": "video", "url": "https://www.youtube.com/embed/ut83JRoqOl0", "title": "😳🥺😳", "desc": "A kafka a day keeps the doctor away" });
+
         // render the home page
-        res.render('home', { userPrompt: "", sanctuaryResponse: "" });
+        res.render('home', { userPrompt: "", sanctuaryResponse: "", promptResponses: persistentPromptResponses });
     });
   
     app.use(navLinks);
@@ -100,22 +114,54 @@ module.exports = function (app) {
     }
 
     async function handleGPTQuery(userPrompt) {
+        if (userPrompt == "") {
+            throw new Error('Aborted-No Query');
+        }
+
         var GPTPrompt = await createGPTPrompt(userPrompt);
         var GPTResponse = await makeAPIRequest(GPTPrompt);
-        // console.log("GPTResponse is: ", GPTResponse)
+        console.log("GPTResponse is: ", GPTResponse)
         var GPTParsed = JSON.parse(GPTResponse);
         var sitesList = GPTParsed.sites;
         console.log("sitesList is: ", sitesList)
         return sitesList
     }
 
+    async function packageAndAddResponsesToRenderList(sitesList, sanctuaryVideos) {
+        // process sequentially
+        // links at the top first, videos at the end
+
+        // TODO: refactor later as just all in one prompt res box
+        sitesList.forEach(site => {
+            persistentPromptResponses.push({ "type": "website", "url": site.url, "title": new URL(site.url).hostname, "desc": site.description });
+        })
+
+        sanctuaryVideos.forEach(video => {
+            persistentPromptResponses.push({ "type": "video", "url": video.url, "title": video.title, "desc": video.description });
+        });
+
+    }
+
+
+    app.get('/', (req, res) => {
+        // render the home page
+        res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "", promptResponses: persistentPromptResponses });
+    });
+
     app.post('/submitPrompt', async (req, res) => {
-        var userPrompt = req.body.prompt;
+        try {
+            var userPrompt = req.body.prompt;
 
-        var sitesList = await handleGPTQuery(userPrompt);
-        var sanctuaryVideos = await handleSanctuaryQuery(userPrompt);
+            var sitesList = await handleGPTQuery(userPrompt);
+            var sanctuaryVideos = await handleSanctuaryQuery(userPrompt);
 
-        res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
+
+            packageAndAddResponsesToRenderList(sitesList, sanctuaryVideos);
+            res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList, promptResponses: persistentPromptResponses }); //, sanctuaryResponse: sanctuaryResponse
+            // res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "", promptResponses: persistentPromptResponses });
+        } catch (error) {
+            res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "", promptResponses: persistentPromptResponses });
+        }
     });
 }
 
