@@ -23,7 +23,7 @@ const navLinks = [{
 },
 {
     name: 'About Us',
-    link: '/about',
+    link: '/aboutUs',
     icon: 'fa solid fa-info-circle',
 },
 {

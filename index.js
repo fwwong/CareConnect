@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const middleware = require('./routes/middleware');
+const navigation = require('./routes/navigation');
 
 // const mongodb_host = process.env.MONGODB_HOST;
 // const mongodb_user = process.env.MONGODB_USER;
@@ -21,6 +22,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(middleware);
+app.use(navigation);
 require('./routes/home')(app);
 
 const port = process.env.PORT || 3000;
