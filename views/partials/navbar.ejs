@@ -1,47 +1,93 @@
-    <nav class="navbar">
-        <div class="container-fluid">
-            <div class="row">
+<nav class="navbar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <a class="navbar-brand" href="/">
+          <img
+            src="/icons/CareConnect.png"
+            class="mt-4 mx-3"
+            alt="CareConnect"
+            width="100%"
+            height="100%"
+          />
+        </a>
+      </div>
 
-                <div class="col">
-                    <a class="navbar-brand" href="/">
-                        <img src="/icons/CareConnect.png" class= "mt-4 mx-3 "alt="CareConnect" width="100%" height="100%">
-                    </a>
-                </div>
+      <div class="col-3 d-flex justify-content-end">
+        <button
+          class="navbar-toggler my-4 mx-2"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="col-3 d-flex justify-content-end">
-                    <button class="navbar-toggler my-4 mx-2 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        <!-- List of services  -->
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <a href="/">
+              <img
+                src="icons/heart.png"
+                class="mt-2"
+                alt="CareConnect"
+                style="height: 50px; width: 50px"
+            /></a>
+            <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">CareConnect</h5> -->
+            <button
+              type="button"
+              class="btn-close mx-3 mt-2"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
 
-                    <!-- List of services  -->
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <div class="offcanvas-header">
-                            <a href="/"> <img src="icons/heart.png" class="mt-2"alt="CareConnect" style="height: 50px; width: 50px;"></a>
-                            <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">CareConnect</h5> -->
-                            <button type="button" class="btn-close mx-3 mt-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-
-                        <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 p-2">
-                                <!-- for loop menu items-->
-                                  <% for(var i = 0; i < navLinks.length; i++) {%>
-                                    <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="<%-navLinks[i].link%>">
-                                            <p class="text-lg"><i class="<%-navLinks[i].icon%>"></i>
-                                                &nbsp; <%-navLinks[i].name %></p>
-                                        </a>
-                                        <hr>
-                                    </li>
-                                    <% } %> 
-                
-
-                              
-                        </div>
-                </div>
-            </div>
-            </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 p-2">
+              <!-- for loop menu items-->
+              <% for(var i = 0; i < navLinks.length-1; i++) {%>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="<%-navLinks[i].link%>"
+                >
+                  <p class="text-lg">
+                    <i class="<%-navLinks[i].icon%>"></i> &nbsp;
+                    <%-navLinks[i].name %>
+                  </p>
+                </a>
+                <hr />
+              </li>
+              <% } %>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                    <i class="<%-navLinks[6].icon%>"></i> &nbsp;
+                  <%-navLinks[6].name%>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-light">
+                    <% for(var i=0; i < languages.length; i++){%>
+                  <li><a class="dropdown-item" href="#"><%-languages[i].name%></a></li>
+                  <% } %>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
-  
+      </div>
+    </div>
+  </div>
+</nav>
