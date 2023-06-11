@@ -117,6 +117,6 @@ module.exports = function (app) {
 
         res.render('home', { userPrompt: userPrompt, sanctuaryResponse: sanctuaryVideos, sitesList: sitesList}); //, sanctuaryResponse: sanctuaryResponse
     });
-
-
 }
+
+
