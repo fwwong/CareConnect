@@ -1,22 +1,20 @@
 <%- include('partials/header') %>
-<%- include('partials/navbar') %>
+    <%- include('partials/navbar') %>
 
-<!-- <h3>bobbobob</h3> -->
-<div class="d-flex justify-content-center">
-    <form method="post" action="/submitPrompt" role="form">
-        <div class="form-group">
-            <label for="prompt">Prompt</label>
-            <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter Prompt" 
-            <% if (userPrompt != "") { %> value='<%=userPrompt%>'> <% } %>
-        </div>
-            <div class="col">
-                <button type="submit"
+
+        <div class="d-flex justify-content-center"
+            style="position: fixed; background-color: rgb(236, 236, 236); bottom: 0; padding: 10px; width: 100%;">
+            <form method="POST" action="/submitPrompt" style="width: 100%;">
+                <div class="form-group" style="float: left;  padding-right: 5px; width:83%">
+                    <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter prompt">
+
+                </div>
+                <button type=" submit" id="submit" style="height: 100%; width: 17%;"
                     class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
                     Submit
                 </button>
-            </div>
-            <p class="text-red-500">Welcome to hi</p>
-    </form>
-</div>
-
-<%- include('partials/footer') %>
+                <input type="hidden" name="blank">
+                </>
+            </form>
+        </div>
+        <%- include('partials/promptContainer', {promptResponseToview: promptResponses})%>
