@@ -1,6 +1,13 @@
 <%- include('partials/header') %>
-    <%- include('partials/navbar') %>
+<%- include('partials/navbar') %>
 
+<div class="card border-success mx-3" style="max-width: 30rem;">
+    <div class="card-header">Type your concern at the bottom</div>
+    <div class="card-body text-success">
+      <h5 class="card-title">Connecting you with reliable resources.</h5>
+      <p class="card-text">Please allow a few seconds for your resources to appear.</p>
+    </div>
+    </div>
 
         <div class="d-flex justify-content-center"
             style="position: fixed; background-color: rgb(236, 236, 236); bottom: 0; padding: 10px; width: 100%;">
@@ -9,12 +16,11 @@
                     <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Enter prompt">
 
                 </div>
-                <button type=" submit" id="submit" style="height: 100%; width: 17%;"
-                    class="btn btn-success btn-success:hover menu_buttons button-padding general-margin configurator-button-width">
-                    Submit
+                <button type="submit" id="submit" style="height: 100%; width: 17%;"
+                    class="btn btn-success btn-success:hover opacity-100 bg-lime-700">
+                    <i class="fa-solid fa-right-long fa-xl"></i>
                 </button>
                 <input type="hidden" name="blank">
-                </>
             </form>
         </div>
         <%- include('partials/promptContainer', {promptResponseToview: promptResponses})%>
