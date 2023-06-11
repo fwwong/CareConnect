@@ -163,6 +163,6 @@ module.exports = function (app) {
             res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "", promptResponses: persistentPromptResponses });
         }
     });
-
-
 }
+
+
