@@ -1,0 +1,11 @@
+<div class="overflow-auto promptcontainer" style="margin-top: 10%;" id="promptContainer">
+    <!-- add the prompts here -->
+
+    <% promptResponseToview.forEach(prompt=> { %>
+        <% if (prompt.type=="website" ) {%>
+            <%- include("promptcontainers/promptInstance-weblink", {info: prompt}) %>
+                <% } else {%>
+                    <%- include("promptcontainers/promptInstance-video", {info: prompt}) %>
+                        <% }%>
+                            <% }); %>
+</div>
