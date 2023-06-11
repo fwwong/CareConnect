@@ -2,6 +2,7 @@ var express = require('express');
 router = express.Router();
 const makeAPIRequest = require('./OpenAIcall');
 const makeSanctuaryAPIRequest = require('./sanctuaryHealthAPIcall');
+const navLinks = require('./middleware');
 const { error } = require('console');
 
 
@@ -62,6 +63,8 @@ module.exports = function (app) {
         // render the home page
         res.render('home', { userPrompt: "", sanctuaryResponse: "", promptResponses: persistentPromptResponses });
     });
+  
+    app.use(navLinks);
 
     async function handleSanctuaryQuery(userPrompt) {
         var listOfWords = generateSearchConditions(userPrompt)
