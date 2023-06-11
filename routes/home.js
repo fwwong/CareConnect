@@ -63,7 +63,7 @@ module.exports = function (app) {
         // render the home page
         res.render('home', { userPrompt: "", sanctuaryResponse: "", promptResponses: persistentPromptResponses });
     });
-  
+
     app.use(navLinks);
 
     async function handleSanctuaryQuery(userPrompt) {
@@ -163,6 +163,6 @@ module.exports = function (app) {
             res.render('home', { userPrompt: "", sanctuaryResponse: "", sitesList: "", promptResponses: persistentPromptResponses });
         }
     });
-
-
 }
+
+

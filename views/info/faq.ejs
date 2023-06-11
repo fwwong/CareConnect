@@ -1,8 +1,74 @@
-<%-include ('../partials/header') %>
-<%-include ('../partials/navbar') %>
+<%-include ('../partials/header') %> <%-include ('../partials/navbar') %>
 
-<h1>This is a faq page</h1>
+<style>
+    .collapse{
+        visibility: visible;
+    }
+</style>
+
+<section
+  class="flex items-center bg-stone-50 xl:h-screen font-poppins"
+>
+  <div class="justify-center flex-1 max-w-6xl py-4 mx-auto">
+      <div class="w-full px-4">
+        <div class="text-center">
+            <div class="relative flex flex-col items-center">
+                <div
+                    class="absolute hidden md:block -top-14 left-0 text-[120px] text-gray-400 font-bold opacity-10">
+                   
+                </div>
+                <h1 class="text-5xl font-bold dark:text-black">FAQ
+                    </span> </h1>
+                <div class="flex w-24 mt-1 mb-10 overflow-hidden rounded">
+                    <div class="flex-1 h-2 bg-lime-200">
+                    </div>
+                    <div class="flex-1 h-2 bg-lime-400">
+                    </div>
+                    <div class="flex-1 h-2 bg-lime-600">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              Q: Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, quis?
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam nobis mollitia quod magnam, impedit quos cumque voluptatibus iusto vitae. Corrupti!
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              Q: Ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos?
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+            A: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur similique placeat sequi, alias vero eius. Neque aliquam quaerat similique tempora, odio ea maxime vitae? Exercitationem eaque earum repellat veritatis dolorum.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+              Q: Dorem ipsum dolor sit amet consectetur adipisicing?
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+            A: Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto nemo vero totam molestias minus aliquid ratione, quo, molestiae unde dignissimos delectus numquam. Blanditiis eaque corporis excepturi quam, saepe cupiditate iusto.
+            </div>
+          </div>
+        </div>
+      </div>
 
 <%-include ('../partials/footer') %>
-
-

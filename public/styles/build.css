@@ -12,3 +12,43 @@
     --hovered-btn-color-tropblu: #4BBDAC;
     --misc-color-turqblu: #336E6F;
 }
+#accordion{
+    margin:100px auto;
+    width:600px;
+  }
+  #accordion li{
+    list-style:none;
+    width:100%;
+    margin-bottom:10px;
+    background: white;
+    padding: 20px;
+    border-radius:4px;
+  }
+  #accordion li label{
+    padding:10px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight:500;
+    cursor: pointer;
+    color:#c2000c;
+  }
+  #accordion li label span{
+    transform: rotate(90deg);
+    font-size: 22px;
+    color:#333
+  }
+  #accordion label + input[type="radio"]{
+    display:none;
+  }
+  #accordion .content{
+    padding:0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow:hidden;
+    transition: max-height 0.5s;
+  }
+  #accordion label + input[type="radio"]:checked + .content{
+    max-height: 400px;
+  }

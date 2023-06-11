@@ -219,17 +219,12 @@ select {
 2. Remove default button styles.
 */
 
-button,
+/* button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
-  /* 1 */
-  /* background-color: transparent; */
-  /* 2 */
-  /* background-image: none; */
-  /* 2 */
-}
+} */
 
 /*
 Use the modern Firefox focus style for all focusable elements.
@@ -522,13 +517,73 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.hidden {
-  display: none;
+.absolute {
+  position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.p-12 {
+  padding: 3rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 :root {
@@ -540,4 +595,44 @@ video {
   --primary-btn-color-blue: #2474A1;
   --hovered-btn-color-tropblu: #4BBDAC;
   --misc-color-turqblu: #336E6F;
+}
+#accordion{
+  margin:100px auto;
+  width:600px;
+}
+#accordion li{
+  list-style:none;
+  width:100%;
+  margin-bottom:10px;
+  background: white;
+  padding: 20px;
+  border-radius:4px;
+}
+#accordion li label{
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight:500;
+  cursor: pointer;
+  color:#c2000c;
+}
+#accordion li label span{
+  transform: rotate(90deg);
+  font-size: 22px;
+  color:#333
+}
+#accordion label + input[type="radio"]{
+  display:none;
+}
+#accordion .content{
+  padding:0 10px;
+  line-height: 26px;
+  max-height: 0;
+  overflow:hidden;
+  transition: max-height 0.5s;
+}
+#accordion label + input[type="radio"]:checked + .content{
+  max-height: 400px;
 }

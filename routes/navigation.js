@@ -21,8 +21,8 @@ router.get("/contact", (req, res) => {
   res.render("../views/info/contact");
 });
 
-router.get("/language", (req, res) => {
-  res.render("../views/info/language");
-});
+// router.get("/language", (req, res) => {
+//   res.render("../views/info/language");
+// });
 
 module.exports = router;
