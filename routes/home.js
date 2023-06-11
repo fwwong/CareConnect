@@ -54,16 +54,16 @@ module.exports = function (app) {
         //init persistent prompt list
         persistentPromptResponses = [];
         //debug for list of rendered responses
-        // persistentPromptResponses.push(
-        //     { "type": "website", "url": "https://stackoverflow.com/questions/55551264/syntaxerror-missing-after-argument-list-in-while-compiling-ejs", "title": "Stackoverflow", "desc": "A Place for nerds who think a lot and shower very very seldomly" },
-        //     { "type": "video", "url": "https://www.youtube.com/embed/w0SxvCScZ3Q", "title": "🥺🥺🥺", "desc": "All the patient care you could ever need" },
-        //     { "type": "video", "url": "https://www.youtube.com/embed/qZfLduNfFig", "title": "😳😳😳", "desc": "A Bit of a Pick me up" },
-        //     { "type": "video", "url": "https://www.youtube.com/embed/ut83JRoqOl0", "title": "😳🥺😳", "desc": "A kafka a day keeps the doctor away" });
+        persistentPromptResponses.push(
+            { "type": "website", "url": "https://stackoverflow.com/questions/55551264/syntaxerror-missing-after-argument-list-in-while-compiling-ejs", "title": "Stackoverflow", "desc": "A Place for nerds who think a lot and shower very very seldomly" },
+            { "type": "video", "url": "https://www.youtube.com/embed/w0SxvCScZ3Q", "title": "🥺🥺🥺", "desc": "All the patient care you could ever need" },
+            { "type": "video", "url": "https://www.youtube.com/embed/qZfLduNfFig", "title": "😳😳😳", "desc": "A Bit of a Pick me up" },
+            { "type": "video", "url": "https://www.youtube.com/embed/ut83JRoqOl0", "title": "😳🥺😳", "desc": "A kafka a day keeps the doctor away" });
 
         // render the home page
         res.render('home', { userPrompt: "", sanctuaryResponse: "", promptResponses: persistentPromptResponses });
     });
-  
+
     app.use(navLinks);
 
     async function handleSanctuaryQuery(userPrompt) {
